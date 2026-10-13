@@ -5,6 +5,7 @@ using namespace std;
 int main() {
     int meniuPasirinkimas;
 
+    //konstantos
     const double GBP_Bendras = 0.8729;
     const double GBP_Pirkti = 0.8600;
     const double GBP_Parduoti = 0.9220;
@@ -42,6 +43,31 @@ int main() {
             cout << "Neteisingas meniu pasirinkimas! Pasirinkite nuo 1 iki 4." << endl;
             break;
         }
+
+
+        //Valiutos pasirinkimas
+        int valiutosPasirinkimas;
+        cout << "\nPasirinkite valiuta:" << endl;
+        cout << "1 - GBP (Didziosios Britanijos svaras)" << endl;
+        cout << "2 - USD (JAV doleris)" << endl;
+        cout << "3 - INR (Indijos rupija)" << endl;
+        cout << "Pasirinkite valiuta (1-3): ";
+
+        if (!(cin >> valiutosPasirinkimas) || valiutosPasirinkimas < 1 || valiutosPasirinkimas > 3) {
+            cout << "Neteisingas valiutos pasirinkimas!" << endl;
+            break;
+        }
+
+        //Sumos ivedimas
+        double suma = 0;
+        if (meniuPasirinkimas == 2 || meniuPasirinkimas == 3) {
+            cout << "Iveskite suma: ";
+            if (!(cin >> suma) || suma <= 0) {
+                cout << "Neteisinga arba neteigiama suma! Suma turi buti didesne uz 0." << endl;
+                break;
+            }
+        }
+
 
     } while (true);
 
