@@ -1,11 +1,12 @@
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
 int main() {
     int meniuPasirinkimas;
 
-    //konstantos
+    //Konstantos
     const double GBP_Bendras = 0.8729;
     const double GBP_Pirkti = 0.8600;
     const double GBP_Parduoti = 0.9220;
@@ -31,7 +32,9 @@ int main() {
 
         if (!(cin >> meniuPasirinkimas)) {
             cout << "Klaida: ivestas ne skaicius! Bandykite dar karta." << endl;
-            break;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
         }
 
         if (meniuPasirinkimas == 4) {
@@ -41,9 +44,8 @@ int main() {
 
         if (meniuPasirinkimas < 1 || meniuPasirinkimas > 4) {
             cout << "Neteisingas meniu pasirinkimas! Pasirinkite nuo 1 iki 4." << endl;
-            break;
+            continue;
         }
-
 
         //Valiutos pasirinkimas
         int valiutosPasirinkimas;
@@ -55,7 +57,9 @@ int main() {
 
         if (!(cin >> valiutosPasirinkimas) || valiutosPasirinkimas < 1 || valiutosPasirinkimas > 3) {
             cout << "Neteisingas valiutos pasirinkimas!" << endl;
-            break;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
         }
 
         //Sumos ivedimas
@@ -64,10 +68,48 @@ int main() {
             cout << "Iveskite suma: ";
             if (!(cin >> suma) || suma <= 0) {
                 cout << "Neteisinga arba neteigiama suma! Suma turi buti didesne uz 0." << endl;
-                break;
+                cin.clear();
+                cin.ignore(10000, '\n');
+                continue;
             }
         }
 
+        //Formatas ir isvedimas
+        cout << fixed << setprecision(2);
+        cout << "\n--- REZULTATAS ---" << endl;
+        cout << "-------------------------------" << endl;
+
+        if (meniuPasirinkimas == 1) {
+            if (valiutosPasirinkimas == 1) {
+                cout << "GBP kursai su euru:" << endl;
+                cout << "Bendras:  " << GBP_Bendras << endl;
+                cout << "Pirkti:   " << GBP_Pirkti << endl;
+                cout << "Parduoti: " << GBP_Parduoti << endl;
+            } else if (valiutosPasirinkimas == 2) {
+                cout << "USD kursai su euru:" << endl;
+                cout << "Bendras:  " << USD_Bendras << endl;
+                cout << "Pirkti:   " << USD_Pirkti << endl;
+                cout << "Parduoti: " << USD_Parduoti << endl;
+            } else if (valiutosPasirinkimas == 3) {
+                cout << "INR kursai su euru:" << endl;
+                cout << "Bendras:  " << INR_Bendras << endl;
+                cout << "Pirkti:   " << INR_Pirkti << endl;
+                cout << "Parduoti: " << INR_Parduoti << endl;
+            }
+        } else if (meniuPasirinkimas == 2) {
+            double rezultatas = 0;
+            if (valiutosPasirinkimas == 1) rezultatas = suma * GBP_Pirkti;
+            else if (valiutosPasirinkimas == 2) rezultatas = suma * USD_Pirkti;
+            else if (valiutosPasirinkimas == 3) rezultatas = suma * INR_Pirkti;
+            cout << "Keiciant gausite: " << rezultatas << endl;
+        } else if (meniuPasirinkimas == 3) {
+            double rezultatas = 0;
+            if (valiutosPasirinkimas == 1) rezultatas = suma / GBP_Parduoti;
+            else if (valiutosPasirinkimas == 2) rezultatas = suma / USD_Parduoti;
+            else if (valiutosPasirinkimas == 3) rezultatas = suma / INR_Parduoti;
+            cout << "Pardavus gausite EUR: " << rezultatas << endl;
+        }
+        cout << "-------------------------------" << endl;
 
     } while (true);
 
